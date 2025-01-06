@@ -33,7 +33,7 @@ ARFLAGS = rcs
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INCDIR) -g3
 
-# Compilation mode (silent by default, set VERBOSE=1 to show commands)
+# Compilation mode
 VERBOSE ?= 0
 ifeq ($(VERBOSE),1)
   V := 

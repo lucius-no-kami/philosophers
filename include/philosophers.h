@@ -6,7 +6,7 @@
 /*   By: luluzuri <luluzuri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:26:53 by luluzuri          #+#    #+#             */
-/*   Updated: 2025/01/05 09:39:10 by luluzuri         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:22:00 by luluzuri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define RESET          "\033[0m"
 
 # include <stdio.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 /* Main logic */
 int	philosophers(void);
