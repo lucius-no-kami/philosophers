@@ -6,7 +6,7 @@
 /*   By: luluzuri <luluzuri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:26:53 by luluzuri          #+#    #+#             */
-/*   Updated: 2025/03/09 17:30:41 by luluzuri         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:17:54 by luluzuri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@
 # include <sys/time.h>
 # include <pthread.h>
 
+# define MTX_ERROR		"mutex init as failed"
+# define ENTRIES_ERROR	"entries must be greater than 0"
+# define NUM_ERROR		"only numbers are accepted as input."
+# define PHILO_ERROR	"number of philos must be contained between 1 and 200"
+# define USAGE			"<philo_number> <time_to_die> <time_to_eat> \
+<time_to_sleep> [time_each_philo_must_eat]\n"
+
+typedef pthread_mutex_t	t_mtx;
+
 typedef struct s_philo
 {
 	pthread_t		thread;
@@ -42,24 +51,24 @@ typedef struct s_philo
 	int				num_of_philos;
 	int				num_times_to_eat;
 	int				*dead;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*meal_lock;
+	t_mtx			*r_fork;
+	t_mtx			*l_fork;
+	t_mtx			*write_lock;
+	t_mtx			*dead_lock;
+	t_mtx			*meal_lock;
 }					t_philo;
 
 typedef struct s_program
 {
 	int				dead_flag;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
+	t_mtx			dead_lock;
+	t_mtx			meal_lock;
+	t_mtx			write_lock;
 	t_philo			*philos;
 }					t_program;
 
-/* Main logic */
-int	philosophers(char **entries);
+/* Init */
+int	global_init(t_program *prog, t_philo *tab, char **entries);
 
 /* Utils */
 int	ft_atoi(const char *nptr);

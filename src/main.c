@@ -6,30 +6,42 @@
 /*   By: luluzuri <luluzuri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:27:09 by luluzuri          #+#    #+#             */
-/*   Updated: 2025/03/09 17:32:34 by luluzuri         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:22:00 by luluzuri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void	print_error(int cerror)
+{
+	printf("%sError%s: ", RED, RESET);
+	if (cerror == 1)
+		printf("%s", NUM_ERROR);
+	else if (cerror == 2)
+		printf("%s", PHILO_ERROR);
+	else if (cerror == 3)
+		printf("%s", ENTRIES_ERROR);
+	printf("\n");
+}
+
 int	main(int ac, char **av)
 {
+	int			ret;
+	t_program	prog;
+	t_philo		tab[200];
+
 	if (ac < 5 || ac > 6)
 	{
-		printf("%sUsages:%s\n%s <philo_number> <time_to_die> \
-<time_to_eat> <time_to_sleep> \
-[time_each_philo_must_eat]\n", RED, RESET, av[0]);
+		printf("%sUsages:%s\n%s %s", RED, RESET, av[0], USAGE);
 		return (1);
 	}
-	printf(CYAN"\n\
-██████╗ ██╗  ██╗██╗██╗      ██████╗ ███████╗ ██████╗ ██████╗ ██╗  ██╗███████╗██████╗ ███████╗\n\
-██╔══██╗██║  ██║██║██║     ██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██║  ██║██╔════╝██╔══██╗██╔════╝\n\
-██████╔╝███████║██║██║     ██║   ██║███████╗██║   ██║██████╔╝███████║█████╗  ██████╔╝███████╗\n\
-██╔═══╝ ██╔══██║██║██║     ██║   ██║╚════██║██║   ██║██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗╚════██║\n\
-██║     ██║  ██║██║███████╗╚██████╔╝███████║╚██████╔╝██║     ██║  ██║███████╗██║  ██║███████║\n\
-╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝\n\
-\n"RESET);
-	return (philosophers(av));
+	ret = global_init(&prog, tab, av);
+	if (ret != 0)
+	{
+		print_error(ret);
+		return (ret);
+	}
+	return (0);
 }
 
 /* 

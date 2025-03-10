@@ -16,8 +16,8 @@ OBJDIR = obj
 INCDIR = include
 
 # Source Files
-SRC_UTILS = ft_atoi.c
-SRC = main.c philosophers.c $(SRC_UTILS)
+SRC_UTILS = ft_atoi.c init.c utils.c
+SRC = main.c $(SRC_UTILS)
 OBJ = $(SRC:.c=.o)
 SRC := $(addprefix $(SRCDIR)/, $(SRC))
 OBJ := $(patsubst $(SRCDIR)/%, $(OBJDIR)/%, $(OBJ))
