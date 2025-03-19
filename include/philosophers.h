@@ -6,7 +6,7 @@
 /*   By: luluzuri <luluzuri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:26:53 by luluzuri          #+#    #+#             */
-/*   Updated: 2025/03/10 14:17:54 by luluzuri         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:28:37 by luluzuri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ typedef struct s_program
 }					t_program;
 
 /* Init */
-int	global_init(t_program *prog, t_philo *tab, char **entries);
+int		global_init(t_program *prog, t_philo *tab, \
+					pthread_mutex_t *forks, char **entries);
 
 /* Utils */
-int	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
+void	clean(t_program *prog);
 
 #endif

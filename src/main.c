@@ -6,13 +6,13 @@
 /*   By: luluzuri <luluzuri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 09:27:09 by luluzuri          #+#    #+#             */
-/*   Updated: 2025/03/10 14:22:00 by luluzuri         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:25:36 by luluzuri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	print_error(int cerror)
+static void	print_error(int cerror)
 {
 	printf("%sError%s: ", RED, RESET);
 	if (cerror == 1)
@@ -26,21 +26,24 @@ void	print_error(int cerror)
 
 int	main(int ac, char **av)
 {
-	int			ret;
-	t_program	prog;
-	t_philo		tab[200];
+	int				ret;
+	t_program		prog;
+	t_philo			philos[200];
+	pthread_mutex_t	forks[200];
 
 	if (ac < 5 || ac > 6)
 	{
 		printf("%sUsages:%s\n%s %s", RED, RESET, av[0], USAGE);
 		return (1);
 	}
-	ret = global_init(&prog, tab, av);
+	ret = global_init(&prog, philos, forks, av);
 	if (ret != 0)
 	{
 		print_error(ret);
 		return (ret);
 	}
+/*	dinner(&prog); */
+	clean(&prog);
 	return (0);
 }
 
